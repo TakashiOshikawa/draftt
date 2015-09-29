@@ -17,7 +17,10 @@ libraryDependencies ++= {
     "com.typesafe.akka"   %%  "akka-testkit"  % akkaV   % "test",
     "org.specs2"          %%  "specs2-core"   % "2.3.11" % "test",
     "net.debasishg" %% "redisclient" % "3.0",
-    "org.json4s" % "json4s-native_2.11" % "3.3.0.RC6"
+    "org.json4s" % "json4s-native_2.11" % "3.3.0.RC6",
+    "com.typesafe.slick" %% "slick" % "3.0.3",
+    "org.slf4j" % "slf4j-nop" % "1.6.4",
+    "mysql" % "mysql-connector-java" % "5.1.24"
   )
 }
 ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) }
