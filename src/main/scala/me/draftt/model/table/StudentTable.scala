@@ -19,6 +19,7 @@ case class Student(  student_id:        Int,
                      want_to_do:        String
                    )
 
+
 class StudentTable(tag: Tag) extends Table[(Int, String, Int, String, String, String, String, String)](tag, "student") {
 
   def student_id        = column[Int]("student_id", O.PrimaryKey)
