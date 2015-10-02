@@ -1,6 +1,7 @@
 package me.draftt.routing
 
 import akka.actor.Actor
+import me.draftt.data.access.objects.StudentDAO
 import me.draftt.util.DrafttJson
 import org.json4s.JsonDSL._
 import spray.http.MediaTypes._
