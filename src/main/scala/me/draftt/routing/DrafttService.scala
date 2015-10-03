@@ -31,7 +31,9 @@ trait DrafttService extends HttpService {
         respondWithMediaType(`application/json`) {
           complete {
             println("res : " + StudentDAO.findAll)
+//            StudentDAO.insert("Draftt man", 34)
 //            StudentDAO.updateHobyByStudentID(1,"Football!")
+//            StudentDAO.deleteByID(4)
             println("res : " + StudentDAO.findByStudentID(1))
             DrafttJson.make(("val1" -> List(1,2,3)))
           }

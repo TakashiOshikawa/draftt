@@ -31,10 +31,8 @@ object StudentDAO extends DAOBase {
    */
   // 名前と年齢を取得して学生会員作成
   def insert(nick_name: String, age: Int) = {
-    val insertActions = DBIO.seq(
-      t.map(s => (s.nick_name, s.age)) += (nick_name, age)
-    )
-    db.run(insertActions)
+    val q = t.map(s => (s.nick_name, s.age)) += (nick_name, age)
+    db.run( DBIO.seq(q) )
   }
 
 
@@ -64,5 +62,9 @@ object StudentDAO extends DAOBase {
   /**
    *  DELELE
    */
+  def deleteByID(id: Int) = {
+    val q = t.filter(_.student_id === id).delete
+    db.run( DBIO.seq(q) )
+  }
 
 }
