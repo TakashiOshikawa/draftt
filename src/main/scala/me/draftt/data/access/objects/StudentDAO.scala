@@ -48,13 +48,17 @@ object StudentDAO extends DAOBase {
 
   // 生徒IDで生徒を取得
   def findByStudentID(id: Int): Seq[Any] = {
-    val q = for (s <- t) yield (s.student_id,s.nick_name,s.age); q
+    val q = for (s <- t if s.student_id === id) yield (s.student_id, s.nick_name, s.age, s.hoby); q
   }
 
 
   /**
    *  UPDATE
    */
+  def updateHobyByStudentID(id: Int, hoby: String) = {
+    val q = t.filter(_.student_id === id).map( s => s.hoby)
+    db.run( DBIO.seq(q.update(hoby)) )
+  }
 
 
   /**
