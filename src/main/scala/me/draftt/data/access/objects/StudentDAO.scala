@@ -6,7 +6,6 @@ import slick.dbio.DBIO
 import slick.driver.MySQLDriver.api._
 import slick.lifted.TableQuery
 
-import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
 import scala.slick.jdbc.{StaticQuery => Q}
@@ -29,16 +28,16 @@ object StudentDAO {
 
   // 全件取得
   def findAll = {
-    val q = for (c <- students) yield c.nick_name
-    val a = q.result
-    val f: Future[Seq[String]] = db.run(a)
-    f.onSuccess { case s => println(s"Result: $s") }
+    val q = for (s <- students) yield s.nick_name
+    val f: Future[Seq[String]] = db.run(q.result)
+    Await.result(f, Duration.Inf)
   }
 
   // 生徒IDで生徒を取得
   def findByStudentID(id: Int) = {
-    val query = students.map(s => (s.student_id,s.nick_name,s.age))
-    db.run(query.result)
+    val q = for (s <- students) yield (s.student_id,s.nick_name,s.age)
+    val f: Future[Any] = db.run(q.result)
+    Await.result(f, Duration.Inf)
   }
 
   def insert(nick_name: String, age: Int) = {
@@ -46,8 +45,6 @@ object StudentDAO {
       students.map(s => (s.nick_name, s.age)) += (nick_name, age)
     )
     db.run(insertActions)
-//    val sql = students.insertStatement
-//    println(insertActions)
   }
 
 }
