@@ -2,6 +2,7 @@ package me.draftt.routing
 
 import akka.actor.Actor
 import me.draftt.data.access.objects.StudentDAO
+import me.draftt.model.Auth.{signUpVal, Signup}
 import me.draftt.util.DrafttJson
 import org.json4s.JsonDSL._
 import spray.http.MediaTypes._
@@ -18,24 +19,31 @@ class DrafttServiceActor extends Actor with DrafttService {
   // this actor only runs our route, but you could add
   // other things here, like request stream processing
   // or timeout handling
-  def receive = runRoute(myRoute)
+  def receive = runRoute(drafttRoute)
 }
 
 
 // this trait defines our service behavior independently from the service actor
 trait DrafttService extends HttpService {
 
-  val myRoute =
+  val drafttRoute =
     path("") {
       get {
         respondWithMediaType(`application/json`) {
           complete {
             println("res : " + StudentDAO.findAll)
-//            StudentDAO.insert("Draftt man", 34)
-//            StudentDAO.updateHobyByStudentID(1,"Football!")
-//            StudentDAO.deleteByID(4)
             println("res : " + StudentDAO.findByStudentID(1))
             DrafttJson.make(("val1" -> List(1,2,3)))
+          }
+        }
+      }
+    } ~
+    path("student" / "signup") {
+      formFields('e_mail, 'password) { (e_mail, password) =>
+        validate(e_mail.nonEmpty && password.nonEmpty , s"Invalid Request") {
+          post {
+            val res = Signup.toStudent( signUpVal(e_mail, password) )
+            complete(res)
           }
         }
       }

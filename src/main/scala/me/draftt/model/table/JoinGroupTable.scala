@@ -1,7 +1,7 @@
 package me.draftt.model.table
 
-import slick.lifted.Tag
 import slick.driver.MySQLDriver.api._
+import slick.lifted.Tag
 
 /**
  * Created by oshikawatakashi on 2015/09/30.

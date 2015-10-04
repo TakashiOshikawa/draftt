@@ -7,22 +7,11 @@ import slick.lifted.Tag
  * Created by oshikawatakashi on 2015/09/30.
  */
 
-//Task(id: Int, taskTitle: String, taskContent: String)
-
-case class Student(  student_id:        Int,
-                     nick_name:         String,
-                     age:               Int,
-                     hoby:              String,
-                     corporate_culture: String,
-                     hope_of_companies: String,
-                     what_did:          String,
-                     want_to_do:        String
-                   )
-
-
-class StudentTable(tag: Tag) extends Table[(Int, String, Int, String, String, String, String, String)](tag, "student") {
+class StudentTable(tag: Tag) extends Table[(Int, String, String, String, Int, String, String, String, String, String)](tag, "student") {
 
   def student_id        = column[Int]("student_id", O.PrimaryKey)
+  def e_mail            = column[String]("e_mail")
+  def password          = column[String]("password")
   def nick_name         = column[String]("nick_name")
   def age               = column[Int]("age")
   def hoby              = column[String]("hoby")
@@ -33,6 +22,8 @@ class StudentTable(tag: Tag) extends Table[(Int, String, Int, String, String, St
 
   def * = (
     student_id,
+    e_mail,
+    password,
     nick_name,
     age,
     hoby,
