@@ -30,9 +30,11 @@ object StudentDAO extends DAOBase {
    *  INSERT
    */
   // 名前と年齢を取得して学生会員作成
-  def insert(nick_name: String, age: Int) = {
-    val q = t.map(s => (s.nick_name, s.age)) += (nick_name, age)
-    db.run( DBIO.seq(q) )
+  def insert(e_mail: String, password: String) = {
+    val q = t.map(s => (s.e_mail, s.password)) += (e_mail, password)
+    val res = Await.result(db.run(DBIO.seq(
+      q
+    )), Duration.Inf)
   }
 
 
@@ -41,12 +43,12 @@ object StudentDAO extends DAOBase {
    */
   // 全件取得
   def findAll: Seq[Any] = {
-    val q = for (s <- t) yield s.nick_name; q
+    val q = for (s <- t) yield s.e_mail; q
   }
 
   // 生徒IDで生徒を取得
   def findByStudentID(id: Int): Seq[Any] = {
-    val q = for (s <- t if s.student_id === id) yield (s.student_id, s.nick_name, s.age, s.hoby); q
+    val q = for (s <- t if s.student_id === id) yield (s.student_id, s.e_mail, s.password); q
   }
 
 
