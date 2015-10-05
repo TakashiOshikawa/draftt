@@ -23,8 +23,8 @@ object Signup {
       case (e , "") => "faild"
       case ("", p ) => "faild"
       case (e , p ) => {
-        new Student().create(e, p)
-        "success"
+        val res = Student.create(e, p)
+        "success: " + res + " !"
       }
     }
   }
