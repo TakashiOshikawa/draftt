@@ -6,10 +6,15 @@ import me.draftt.data.access.objects.StudentDAO
  * Created by oshikawatakashi on 2015/10/04.
  */
 
-class Student {
+object Student {
 
   def create(e_mail: String, password: String) = {
-    StudentDAO.insert(e_mail, password)
+    val res = StudentDAO.insert(e_mail, password)
+    res
+  }
+
+  def statusMe() = {
+//    val me = StudentDAO.findByStudentID()
   }
 
 }
