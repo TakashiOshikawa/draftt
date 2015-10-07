@@ -6,7 +6,10 @@ import slick.lifted.Tag
 /**
  * Created by oshikawatakashi on 2015/09/30.
  */
-class JoinGroupTable(tag: Tag) extends Table[(Int, Int, String, String)](tag, "join_group") {
+
+case class JoinGroup(join_group_id: Int, student_id: Int, group_name: String, activity: String)
+
+class JoinGroupTable(tag: Tag) extends Table[JoinGroup](tag, "join_group") {
 
   def join_group_id = column[Int]("join_group_id", O.PrimaryKey)
   def student_id    = column[Int]("student_id")
@@ -18,6 +21,6 @@ class JoinGroupTable(tag: Tag) extends Table[(Int, Int, String, String)](tag, "j
     student_id,
     group_name,
     activity
-  )
+  ) <> (JoinGroup.tupled, JoinGroup.unapply)
 
 }
