@@ -31,11 +31,19 @@ object StudentDAO extends DAOBase {
    */
   // 名前と年齢を取得して学生会員作成
   def insert(e_mail: String, password: String) = {
+//    val q = t.map(s => (s.e_mail, s.password)) += (e_mail, password)
     val q = t.map(s => (s.e_mail, s.password)) += (e_mail, password)
     val res = Await.result(db.run(DBIO.seq(
       q
     )), Duration.Inf)
+    res
   }
+//  def insert(e_mail: String, password: String) = {
+//    val q = t.map(s => (s.e_mail, s.password)) += (e_mail, password)
+//    val res = Await.result(db.run(DBIO.seq(
+//      q
+//    )), Duration.Inf)
+//  }
 
 
   /**
@@ -68,5 +76,10 @@ object StudentDAO extends DAOBase {
     val q = t.filter(_.student_id === id).delete
     db.run( DBIO.seq(q) )
   }
+
+
+  /**
+   *  COUNT
+   */
 
 }
