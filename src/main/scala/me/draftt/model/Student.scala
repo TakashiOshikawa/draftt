@@ -13,6 +13,10 @@ object Student {
     res
   }
 
+  def select() = {
+    StudentDAO.findStudentByAge(18)
+  }
+
   def statusMe() = {
 //    val me = StudentDAO.findByStudentID()
   }

@@ -1,6 +1,7 @@
 package me.draftt.data.access.objects
 
 import me.draftt.model.table.StudentTable
+import slick.backend.DatabasePublisher
 import slick.dbio.DBIO
 import slick.driver.MySQLDriver.api._
 
@@ -44,6 +45,14 @@ object StudentDAO extends DAOBase {
 //      q
 //    )), Duration.Inf)
 //  }
+
+
+  def findStudentByAge(age: Int) = {
+    val q = for (s <- t) yield s.nick_name
+    val a = q.result
+    val p: DatabasePublisher[String] = db.stream(a)
+    p
+  }
 
 
   /**
