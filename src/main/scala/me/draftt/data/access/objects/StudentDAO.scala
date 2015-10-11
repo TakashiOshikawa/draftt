@@ -38,12 +38,6 @@ object StudentDAO extends DAOBase {
     )), Duration.Inf)
     res
   }
-//  def insert(e_mail: String, password: String) = {
-//    val q = t.map(s => (s.e_mail, s.password)) += (e_mail, password)
-//    val res = Await.result(db.run(DBIO.seq(
-//      q
-//    )), Duration.Inf)
-//  }
 
 
   /**

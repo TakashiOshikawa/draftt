@@ -13,8 +13,5 @@ object Student {
     res
   }
 
-  def statusMe() = {
-//    val me = StudentDAO.findByStudentID()
-  }
 
 }
