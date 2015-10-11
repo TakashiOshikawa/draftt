@@ -3,7 +3,6 @@ package me.draftt.routing
 import akka.actor.Actor
 import me.draftt.data.access.objects.StudentDAO
 import me.draftt.model.Auth.{signUpVal, Signup}
-import me.draftt.model.Student
 import me.draftt.util.DrafttJson
 import org.json4s.JsonDSL._
 import spray.http.MediaTypes._
@@ -48,12 +47,5 @@ trait DrafttService extends HttpService {
           }
         }
       }
-    } ~
-    path("student" / "find") {
-        get {
-          val student = Student.select()
-          println("ss" + student)
-          complete("ok")
-        }
     }
 }
